@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+    match /supportTickets/{ticketId} {
+      allow read, write: if true;
+    }
+    match /chatSessions/{sessionId} {
+      allow read, write: if true;
+      match /messages/{messageId} {
+        allow read, write: if true;
+      }
+    }
+    match /referrals/{referralId} {
+      allow read, write: if true;
+    }
+    match /referralClaims/{claimId} {
+      allow read, write: if true;
+    }
+    match /referralSettings/{settingId} {
+      allow read, write: if true;
+    }
+    match /dailySignIns/{recordId} {
+      allow read, write: if true;
+    }
+    match /rescueClaims/{claimId} {
+      allow read, write: if true;
+    }
+    match /promoCodes/{codeId} {
+      allow read, write: if true;
+    }
+    match /promoRedemptions/{redemptionId} {
+      allow read, write: if true;
+    }
+    match /userTickets/{ticketId} {
+      allow read, write: if true;
+    }
+  }
+}

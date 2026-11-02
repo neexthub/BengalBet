@@ -1,0 +1,8 @@
+{
+  "name": "Bengal Bet Casino \u0026 Gaming Portal x3",
+  "description": "Full-featured Bengal Bet recreation of gaming and promotions platform with games lobby, promotions, lucky spin, VIP rewards, and bKash/Nagad wallet support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

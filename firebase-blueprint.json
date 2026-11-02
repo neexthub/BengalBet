@@ -1,0 +1,261 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile, balance, and account state",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "avatar": { "type": "string" },
+        "balance": { "type": "number" },
+        "vipLevel": { "type": "number" },
+        "vipExp": { "type": "number" },
+        "vipMaxExp": { "type": "number" },
+        "freeSpins": { "type": "number" },
+        "redPacketsAvailable": { "type": "number" },
+        "goldenEggsAvailable": { "type": "number" },
+        "unreadNotifications": { "type": "number" },
+        "referralCode": { "type": "string" },
+        "totalEarnings": { "type": "number" },
+        "referredFriendsCount": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["username", "balance"]
+    },
+    "SupportTicket": {
+      "title": "SupportTicket",
+      "description": "User and admin support ticket inquiry and resolution records",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ticketNumber": { "type": "string" },
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "type": { "type": "string" },
+        "subject": { "type": "string" },
+        "content": { "type": "string" },
+        "contact": { "type": "string" },
+        "priority": { "type": "string", "enum": ["normal", "high", "urgent"] },
+        "status": { "type": "string", "enum": ["pending", "in_progress", "replied", "resolved", "closed"] },
+        "reply": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "type", "content", "status"]
+    },
+    "ChatSession": {
+      "title": "ChatSession",
+      "description": "24/7 Live chat sessions between players and support agents",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "userVip": { "type": "number" },
+        "userBalance": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "waiting", "resolved", "closed"] },
+        "department": { "type": "string" },
+        "lastMessage": { "type": "string" },
+        "lastMessageAt": { "type": "string" },
+        "rating": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "username", "status"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Messages exchanged in live chat sessions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sessionId": { "type": "string" },
+        "sender": { "type": "string", "enum": ["user", "agent", "bot", "system"] },
+        "senderName": { "type": "string" },
+        "text": { "type": "string" },
+        "attachmentUrl": { "type": "string" },
+        "isRead": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["sessionId", "sender", "text"]
+    },
+    "Referral": {
+      "title": "Referral",
+      "description": "Records of user invitations, commissions, and invitee activities",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "referrerId": { "type": "string" },
+        "referrerUsername": { "type": "string" },
+        "referrerCode": { "type": "string" },
+        "referredUserId": { "type": "string" },
+        "referredUsername": { "type": "string" },
+        "referredPhone": { "type": "string" },
+        "level": { "type": "number" },
+        "instantBonusPaid": { "type": "boolean" },
+        "instantBonusAmount": { "type": "number" },
+        "totalDeposit": { "type": "number" },
+        "totalBet": { "type": "number" },
+        "depositCommission": { "type": "number" },
+        "betCommission": { "type": "number" },
+        "totalCommissionEarned": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "pending_first_deposit", "frozen"] },
+        "joinedAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["referrerId", "referredUserId", "referrerCode"]
+    },
+    "ReferralRewardClaim": {
+      "title": "ReferralRewardClaim",
+      "description": "Milestone invite tier claims and bonus payouts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "tierId": { "type": "number" },
+        "requiredCount": { "type": "number" },
+        "bonusAmount": { "type": "number" },
+        "trxId": { "type": "string" },
+        "claimedAt": { "type": "string" }
+      },
+      "required": ["userId", "tierId", "bonusAmount"]
+    },
+    "DailySignIn": {
+      "title": "DailySignIn",
+      "description": "User daily sign-in and attendance streak logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "day": { "type": "number" },
+        "bonus": { "type": "number" },
+        "date": { "type": "string" },
+        "streak": { "type": "number" },
+        "status": { "type": "string" },
+        "claimedAt": { "type": "string" }
+      },
+      "required": ["userId", "day", "bonus", "date"]
+    },
+    "RescueClaim": {
+      "title": "RescueClaim",
+      "description": "Daily net loss rescue relief fund claims and audit logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "date": { "type": "string" },
+        "netLoss": { "type": "number" },
+        "percentage": { "type": "number" },
+        "bonusAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["claimed", "approved", "rejected", "pending"] },
+        "claimedAt": { "type": "string" }
+      },
+      "required": ["userId", "date", "bonusAmount", "status"]
+    },
+    "PromoCode": {
+      "title": "PromoCode",
+      "description": "Redeemable promo and promotional vouchers created by admin",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "title": { "type": "string" },
+        "type": { "type": "string" },
+        "amount": { "type": "number" },
+        "minVipLevel": { "type": "number" },
+        "maxUsageCount": { "type": "number" },
+        "currentUsageCount": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "inactive", "expired"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["code", "amount", "status"]
+    },
+    "PromoRedemption": {
+      "title": "PromoRedemption",
+      "description": "Log of promo code redemptions by users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "promoId": { "type": "string" },
+        "code": { "type": "string" },
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "bonusAmount": { "type": "number" },
+        "redeemedAt": { "type": "string" }
+      },
+      "required": ["code", "userId", "bonusAmount"]
+    },
+    "UserTicket": {
+      "title": "UserTicket",
+      "description": "User coupon and reward ticket vouchers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "productName": { "type": "string" },
+        "redeemCode": { "type": "string" },
+        "amount": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "used", "claimed", "expired"] },
+        "targetAction": { "type": "string" },
+        "dateCategory": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "name", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "entity": "User",
+      "description": "User profile documents keyed by their Firebase Auth UID"
+    },
+    "/supportTickets/{ticketId}": {
+      "entity": "SupportTicket",
+      "description": "Support tickets submitted by users and managed by admin"
+    },
+    "/chatSessions/{sessionId}": {
+      "entity": "ChatSession",
+      "description": "Live chat sessions"
+    },
+    "/chatSessions/{sessionId}/messages/{messageId}": {
+      "entity": "ChatMessage",
+      "description": "Messages inside live chat sessions"
+    },
+    "/referrals/{referralId}": {
+      "entity": "Referral",
+      "description": "Individual referral connection and commission log"
+    },
+    "/referralClaims/{claimId}": {
+      "entity": "ReferralRewardClaim",
+      "description": "Claimed milestone tier reward logs"
+    },
+    "/dailySignIns/{recordId}": {
+      "entity": "DailySignIn",
+      "description": "User daily sign-in records"
+    },
+    "/rescueClaims/{claimId}": {
+      "entity": "RescueClaim",
+      "description": "User loss rescue claims"
+    },
+    "/promoCodes/{codeId}": {
+      "entity": "PromoCode",
+      "description": "Promotional codes"
+    },
+    "/promoRedemptions/{redemptionId}": {
+      "entity": "PromoRedemption",
+      "description": "User promo redemption logs"
+    },
+    "/userTickets/{ticketId}": {
+      "entity": "UserTicket",
+      "description": "User reward and voucher tickets"
+    }
+  }
+}
